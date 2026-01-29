@@ -28,8 +28,9 @@ SECRET_KEY =\
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-CSRF_TRUSTED_ORIGINS = []
+# ✅ ADDED HOSTS (keep your app URL, no trailing slash)
+ALLOWED_HOSTS = ['localhost', '<your_application_url_here>']
+CSRF_TRUSTED_ORIGINS = ['https://<your_application_url_here>']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [],
@@ -61,7 +62,12 @@ ROOT_URLCONF = 'djangoproj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+
+        # ✅ ADDED frontend static directory
+        'DIRS': [
+            os.path.join(BASE_DIR, 'frontend/static')
+        ],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,5 +140,7 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = []
-
+# ✅ ADDED frontend static directory
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/static')
+]
