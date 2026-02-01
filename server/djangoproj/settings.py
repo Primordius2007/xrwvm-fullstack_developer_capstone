@@ -29,8 +29,16 @@ SECRET_KEY =\
 DEBUG = True
 
 # ✅ ADDED HOSTS (keep your app URL, no trailing slash)
-ALLOWED_HOSTS = ['localhost', '<your_application_url_here>']
-CSRF_TRUSTED_ORIGINS = ['https://<your_application_url_here>']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'narayanparas-8000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://narayanparas-8000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai'
+]
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [],
