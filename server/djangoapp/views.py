@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate
 from django.views.decorators.csrf import csrf_exempt
-
+from .restapis import get_request
 import json
 
 from .models import CarMake, CarModel
@@ -118,3 +118,23 @@ def registration(request):
     Placeholder for registration
     """
     return JsonResponse({"status": "Registered"})
+
+
+
+def get_dealerships(request, state="All"):
+    """
+    Fetch all dealerships or filter by state
+    """
+    if state == "All":
+        endpoint = "/fetchDealers"
+    else:
+        endpoint = f"/fetchDealers/{state}"
+
+    dealerships = get_request(endpoint)
+
+    return JsonResponse(
+        {
+            "status": 200,
+            "dealers": dealerships,
+        }
+    )
