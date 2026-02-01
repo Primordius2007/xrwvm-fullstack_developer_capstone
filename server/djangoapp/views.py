@@ -119,6 +119,7 @@ def registration(request):
     """
     return JsonResponse({"status": "Registered"})
 
+
 def get_dealerships(request, state="All"):
     """
     Fetch all dealerships or filter by state
