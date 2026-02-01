@@ -118,4 +118,3 @@ def registration(request):
     Placeholder for registration
     """
     return JsonResponse({"status": "Registered"})
-
