@@ -1,55 +1,25 @@
+from django.contrib import admin
+from django.urls import path, include
+from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path
-
-from . import views
-
-app_name = "djangoapp"
 
 urlpatterns = [
-    # ---------- AUTH ----------
-    path(
-        "login/",
-        views.login_user,
-        name="login",
-    ),
+    # Django admin
+    path('admin/', admin.site.urls),
 
-    # ---------- CARS ----------
-    path(
-        "get_cars/",
-        views.get_cars,
-        name="getcars",
-    ),
+    # React frontend routes (SPA)
+    path('', TemplateView.as_view(template_name="index.html")),
+    path('dealers/', TemplateView.as_view(template_name="index.html")),
+    path('dealer/<int:dealer_id>', TemplateView.as_view(template_name="index.html")),
+    path('login/', TemplateView.as_view(template_name="index.html")),
+    path('register/', TemplateView.as_view(template_name="index.html")),
+    path('postreview/<int:dealer_id>', TemplateView.as_view(template_name="index.html")),
 
-    # ---------- DEALERS ----------
-    path(
-        "get_dealers/",
-        views.get_dealerships,
-        name="get_dealers",
-    ),
-    path(
-        "get_dealers/<str:state>/",
-        views.get_dealerships,
-        name="get_dealers_by_state",
-    ),
-    path(
-        "dealer/<int:dealer_id>/",
-        views.get_dealer_details,
-        name="dealer_details",
-    ),
-    path(
-        "reviews/dealer/<int:dealer_id>/",
-        views.get_dealer_reviews,
-        name="dealer_reviews",
-    ),
+    # Django backend APIs
+    path('djangoapp/', include('djangoapp.urls')),
+]
 
-    # ---------- REVIEWS ----------
-    path(
-        "add_review/",
-        views.add_review,
-        name="add_review",
-    ),
-] + static(
-    settings.MEDIA_URL,
-    document_root=settings.MEDIA_ROOT,
-)
+# Static & media files
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
